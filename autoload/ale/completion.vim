@@ -383,6 +383,7 @@ endfunction
 
 function! ale#completion#GetCompletionKind(kind) abort
     let l:lsp_symbol = get(g:ale_lsp_types, a:kind, '')
+
     if !empty(l:lsp_symbol)
         return l:lsp_symbol
     endif
@@ -392,16 +393,11 @@ endfunction
 
 function! ale#completion#GetCompletionSymbols(kind) abort
     let l:kind = ale#completion#GetCompletionKind(a:kind)
-    echom l:kind
     let l:symbol = get(g:ale_completion_symbols, l:kind, '')
 
-    echom l:symbol
-
     if !empty(l:symbol)
-        echom 'not empty'
         return l:symbol
     endif
-    echom 'empty'
 
     return get(g:ale_completion_symbols, '<default>', 'v')
 endfunction
